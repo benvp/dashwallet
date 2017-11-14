@@ -5,7 +5,9 @@ defmodule DashwalletWeb.Router do
     plug :accepts, ["html"]
     plug :fetch_session
     plug :fetch_flash
-    plug :protect_from_forgery
+    # disabled csrf protection because we require
+    # a POST Request with the trail wallet data to process (e.g. CSV)
+    # plug :protect_from_forgery
     plug :put_secure_browser_headers
   end
 
@@ -17,6 +19,7 @@ defmodule DashwalletWeb.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+    post "/", PageController, :parse
   end
 
   # Other scopes may use custom stacks.
