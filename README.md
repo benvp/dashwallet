@@ -1,2 +1,2 @@
 # dashwallet
-Analysis Dashboard for Trail Wallet
+Analysis Dashboard for Trail Wallet (http://voyagetravelapps.com/trail-wallet)
