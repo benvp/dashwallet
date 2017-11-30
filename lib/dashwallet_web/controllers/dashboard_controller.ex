@@ -1,4 +1,4 @@
-defmodule DashwalletWeb.PageController do
+defmodule DashwalletWeb.DashboardController do
   use DashwalletWeb, :controller
 
   require Logger
@@ -6,19 +6,23 @@ defmodule DashwalletWeb.PageController do
   alias Dashwallet.Parser
 
   def index(conn, _params) do
-    render conn, "index.html"
+    data = get_session(conn, :trailwallet_data)
+
+    conn
+    |> assign(:trailwallet_data, data)
+    |> render("index.html")
   end
 
   def parse(conn, %{"file" => %Plug.Upload{content_type: "text/csv"} = upload}) do
-
     data = parse_upload(upload.path)
     |> Parser.entries_for_trip
     |> Poison.encode!
 
     conn
+    |> put_session(:trailwallet_data, data)
     |> assign(:trailwallet_data, data)
     |> put_flash(:info, "You uploaded the following file: #{upload.filename}")
-    |> render("dashboard.html")
+    |> render("index.html")
   end
 
   def parse(conn, _params) do

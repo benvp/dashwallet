@@ -1,4 +1,4 @@
-defmodule DashwalletWeb.PageControllerTest do
+defmodule DashwalletWeb.DashboardControllerTest do
   use DashwalletWeb.ConnCase
 
   test "GET /", %{conn: conn} do
