@@ -1,3 +1,1 @@
-defmodule Dashwallet.Parser.CSV do
-
-end
+NimbleCSV.define(Dashwallet.Parser.CSV, separator: ",", escape: "\"")
