@@ -12,8 +12,18 @@ defmodule Dashwallet.Parser do
       home_amount: home_amount,
       category: category,
       notes: notes,
-      tags: tags,
+      tags: String.split(","),
       image: image
     }
+  end
+
+  def entries_for_trip(data) do
+    data
+    |> Enum.map(fn %{:trip => trip} -> trip end)
+    |> count_occurrences
+  end
+
+  defp count_occurrences(list) do
+    Enum.reduce(list, %{}, fn x, acc -> Map.update(acc, x, 1, &(&1 + 1)) end)
   end
 end

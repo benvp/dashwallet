@@ -1,0 +1,9 @@
+<div class="row marketing">
+  <div class="col-lg-6">
+    <h4>Uploads</h4>
+    <ul>
+      <%= inspect @trailwallet_data %>
+      <%= raw Chartkick.pie_chart @trailwallet_data %>
+    </ul>
+  </div>
+</div>
