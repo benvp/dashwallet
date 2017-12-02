@@ -4,6 +4,10 @@ defmodule DashwalletWeb.UploadController do
   alias Dashwallet.Parser
   alias Dashwallet.Cache
 
+  def index(conn, _params) do
+    render conn, "index.html"
+  end
+
   def upload(conn, %{"file" => %Plug.Upload{content_type: "text/csv"} = upload}) do
     data = parse_upload(upload.path)
 
@@ -11,20 +15,19 @@ defmodule DashwalletWeb.UploadController do
       {:ok, id} ->
         conn
         |> put_session(:tw_data_key, id)
-        |> assign(:tw_data, data)
         |> put_flash(:info, "You uploaded the following file: #{upload.filename}")
-        |> render("index.html")
+        |> redirect to: dashboard_path(conn, :index)
       {:error, err} ->
         conn
         |> put_flash(:error, "There was an error processing your request. Please try again.")
-        |> render("index.html")
+        |> redirect to: dashboard_path(conn, :index)
     end
   end
 
   def upload(conn, _params) do
     conn
     |> put_flash(:error, "Sorry, you provided an unsupported file type.")
-    |> render("index.html")
+    |> redirect to: dashboard_path(conn, :index)
   end
 
   # private stuff

@@ -1,4 +1,12 @@
 <div class="row marketing">
   <h1>Welcome to dashwallet!</h1>
   <p>Please upload a file first by sending a POST to <%= link "/uploads", to: upload_path(@conn, :upload) %></p>
+
+  <div class="col-lg-6">
+    <h4>Tags Analysis</h4>
+    <ul>
+      <%= inspect @tw_data %>
+      <%= raw Chartkick.pie_chart @tw_data %>
+    </ul>
+  </div>
 </div>
