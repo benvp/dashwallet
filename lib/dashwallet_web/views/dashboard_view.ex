@@ -1,3 +1,3 @@
-defmodule DashwalletWeb.DashboardView do
+defmodule DashwalletWeb.UploadView do
   use DashwalletWeb, :view
 end

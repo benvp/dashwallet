@@ -19,7 +19,7 @@ defmodule DashwalletWeb.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", DashboardController, :index
-    post "/", DashboardController, :parse
+    post "/upload", UploadController, :upload
   end
 
   # Other scopes may use custom stacks.
