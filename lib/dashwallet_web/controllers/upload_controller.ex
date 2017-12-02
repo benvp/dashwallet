@@ -20,14 +20,14 @@ defmodule DashwalletWeb.UploadController do
       {:error, err} ->
         conn
         |> put_flash(:error, "There was an error processing your request. Please try again.")
-        |> redirect to: dashboard_path(conn, :index)
+        |> render("index.html")
     end
   end
 
   def upload(conn, _params) do
     conn
     |> put_flash(:error, "Sorry, you provided an unsupported file type.")
-    |> redirect to: dashboard_path(conn, :index)
+    |> render("index.html")
   end
 
   # private stuff
