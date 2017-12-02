@@ -40,7 +40,9 @@ defmodule Dashwallet.Mixfile do
       {:cowboy, "~> 1.0"},
       {:nimble_csv, "~> 0.3"},
       {:poison, "~> 3.1", override: true},
-      {:chartkick, "~> 0.0.2"}
+      {:chartkick, "~> 0.0.2"},
+      {:uuid, "~> 1.1"},
+      {:cachex, "~> 2.1"}
     ]
   end
 end

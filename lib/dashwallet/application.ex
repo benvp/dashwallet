@@ -12,6 +12,8 @@ defmodule Dashwallet.Application do
       supervisor(DashwalletWeb.Endpoint, []),
       # Start your own worker by calling: Dashwallet.Worker.start_link(arg1, arg2, arg3)
       # worker(Dashwallet.Worker, [arg1, arg2, arg3]),
+      # Start Cachex worker
+      worker(Cachex, [:dashwallet, []])
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

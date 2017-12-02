@@ -1,9 +1,11 @@
 <div class="row marketing">
-  <div class="col-lg-6">
-    <h4>Uploads</h4>
-    <ul>
-      <%= inspect @trailwallet_data %>
-      <%= raw Chartkick.pie_chart @trailwallet_data %>
-    </ul>
-  </div>
+  <%= if @tw_data do %>
+    <div class="col-lg-6">
+      <h4>Tags Analysis</h4>
+      <ul>
+        <%= inspect @tw_data %>
+        <%= raw Chartkick.pie_chart @tw_data %>
+      </ul>
+    </div>
+  <% end %>
 </div>
