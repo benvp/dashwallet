@@ -9,12 +9,17 @@ defmodule DashwalletWeb.DashboardController do
   def index(conn, _params) do
     data = get_session(conn, :tw_data_key) |> Cache.get!
 
-    if is_nil(data) do
-      conn = put_flash(conn, :info, "No data present. Please upload trailwallet data first.")
-    end
+    case is_nil(data) do
+      true ->
+        conn
+        |> put_flash(:info, "No data present. Please upload trailwallet data first.")
+        |> redirect to: upload_path(conn, :index)
+      _ ->
+        expenses_by_tag = Parser.expenses_by_tag(data) |> Poison.encode!
 
-    conn
-    |> assign(:tw_data, data)
-    |> render("index.html")
+        conn
+        |> assign(:expenses_by_tag, expenses_by_tag)
+        |> render("index.html")
+    end
   end
 end

@@ -1,6 +1,11 @@
 defmodule Dashwallet.Parser do
   require Logger
 
+  @doc """
+  Maps a trailwallet data row into a `Map`.
+
+  Returns a parsed `Map`.
+  """
   def map_csv([
     trip, date, local_currency, local_amount, home_currency,
     home_amount, category, notes, tags, image
@@ -9,9 +14,9 @@ defmodule Dashwallet.Parser do
       trip: trip,
       date: date,
       local_currency: local_currency,
-      local_amount: local_amount,
+      local_amount: convert_amount_to_float(local_amount),
       home_currency: home_currency,
-      home_amount: home_amount,
+      home_amount: convert_amount_to_float(home_amount),
       category: category,
       notes: notes,
       tags: split_and_trim(tags),
@@ -35,7 +40,31 @@ defmodule Dashwallet.Parser do
     |> Enum.group_by(fn %{tags: [head]} -> head end)
   end
 
+  @doc """
+  Calculates expenses for tags and groups them by tag.
+
+  Returns a `Map` in the following format:
+    `%{"Restaurant" => 130.23}`
+  """
+  def expenses_by_tag(data) do
+    data
+    |> normalize
+    |> Enum.group_by(fn %{tags: [head]} -> head end, fn x -> x.home_amount end)
+    |> Enum.reduce(%{}, fn {k, v}, acc -> Map.put(acc, k, Float.round(Enum.sum(v), 2)) end)
+  end
+
   # private
+
+  # selectors
+
+  defp tags(normalized_data) do
+    normalized_data
+    |> Stream.map(fn %{tags: [tag]} -> tag end)
+    |> Stream.uniq
+    |> Enum.to_list
+  end
+
+  # helper
 
   defp normalize(data) do
     single_tags = Stream.filter(data, &(!has_multiple_tags(&1)))
@@ -57,4 +86,20 @@ defmodule Dashwallet.Parser do
   defp count_occurrences(list) do
     Enum.reduce(list, %{}, fn x, acc -> Map.update(acc, x, 1, &(&1 + 1)) end)
   end
+
+  defp convert_amount_to_float(str) do
+    str
+    |> String.replace(",", ".")
+    |> fix_leading_zeros
+    |> Float.parse
+    |> case do
+      {float, _} -> float
+      :error -> raise ArgumentError, message: "Unable to convert given string to float."
+    end
+  end
+
+  # Adds a leading zero if the trailwallet data has an amount lower than 1.
+  # This is a hotfix for a bug in the csv export of trailwallet.
+  # Amounts < 1 get exported without a zero, like this: ",43"
+  defp fix_leading_zeros(amount) when is_binary(amount), do: String.replace(amount, ~r/^\./, "0.")
 end
