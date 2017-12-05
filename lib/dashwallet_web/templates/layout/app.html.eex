@@ -17,7 +17,8 @@
       <nav class="uk-navbar-container" uk-navbar>
         <div class="uk-navbar-left">
           <ul class="uk-navbar-nav">
-            <li class="uk-active"><%= link "Dashwallet", to: dashboard_path(@conn, :index) %></li>
+            <li class="<%= active_link(@conn, DashwalletWeb.DashboardController) %>"><%= link "Dashwallet", to: dashboard_path(@conn, :index) %></li>
+            <li class="<%= active_link(@conn, DashwalletWeb.UploadController) %>"><%= link "Upload", to: upload_path(@conn, :index) %></li>
           </ul>
         </div>
       </nav>

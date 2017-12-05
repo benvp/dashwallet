@@ -1,9 +1,6 @@
 <div>
-  <h1>Welcome to dashwallet!</h1>
-  <div>
-    <h4>Tags Analysis</h4>
-    <ul>
-      <%= raw Chartkick.pie_chart @expenses_by_tag, height: "800px" %>
-    </ul>
-  </div>
+  <h4>Tags Analysis</h4>
+  <ul>
+    <%= raw Chartkick.pie_chart @expenses_by_tag, height: "800px" %>
+  </ul>
 </div>

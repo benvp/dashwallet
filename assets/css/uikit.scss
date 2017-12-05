@@ -1,5 +1,14 @@
 // 1. Your custom variables and variable overwrites.
 $global-background: #FEFAFF;
+$global-font-family: Barlow, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+$button-primary-background: #4C2C54;
+
+$navbar-background: #5D4265;
+$navbar-nav-item-color: rgba(255, 255, 255, 0.5);
+$navbar-nav-item-active-color: rgba(255, 255, 255, 1);
+$navbar-nav-item-hover-color: rgba(255, 255, 255, 0.7);
+$navbar-nav-item-onclick-color: rgba(255, 255, 255, 1);
 
 // 2. Import default variables and available mixins.
 @import "variables-theme";

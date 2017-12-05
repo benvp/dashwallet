@@ -1,15 +1,16 @@
 <div>
   <div>
-    <h4>Upload trailwallet data (*.csv).</h4>
     <%= form_for @conn, upload_path(@conn, :upload), [multipart: true], fn f -> %>
-      <div class="form-group">
-        <label>Photo</label>
-        <%= file_input f, :file, class: "form-control" %>
-      </div>
-
-      <div class="form-group">
-        <%= submit "Submit", class: "btn btn-primary" %>
-      </div>
+      <fieldset class="uk-fieldset">
+        <legend class="uk-legend">Upload trailwallet data</legend>
+        <div class="uk-margin" uk-margin>
+          <div class="uk-width-1-1" uk-form-custom="target: true">
+              <%= file_input f, :file, class: "uk-input" %>
+              <input class="uk-input" type="text" placeholder="Select file" disabled>
+          </div>
+        </div>
+        <%= submit "Submit", class: "uk-button uk-button-primary uk-width-1-1" %>
+      </fieldset>
     <% end %>
   </div>
 </div>
