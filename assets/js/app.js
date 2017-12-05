@@ -11,8 +11,12 @@
 //
 // If you no longer want to use a dependency, remember
 // to also remove its path from "config.paths.watched".
-import 'phoenix_html'
-import 'chart.js'
+import 'phoenix_html';
+import UIkit from 'uikit';
+import Icons from 'uikit/dist/js/uikit-icons';
+import 'chart.js';
+
+UIkit.use(Icons);
 
 // Import local files
 //

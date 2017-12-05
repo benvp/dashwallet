@@ -1,5 +1,5 @@
-<div class="row marketing">
-  <div class="col-lg-6">
+<div>
+  <div>
     <h4>Upload trailwallet data (*.csv).</h4>
     <%= form_for @conn, upload_path(@conn, :upload), [multipart: true], fn f -> %>
       <div class="form-group">

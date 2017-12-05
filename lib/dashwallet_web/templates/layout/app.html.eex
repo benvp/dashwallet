@@ -13,23 +13,36 @@
   </head>
 
   <body>
-    <div class="container">
-      <header class="header">
-        <nav role="navigation">
-          <ul class="nav nav-pills pull-right">
-            <li><a href="http://www.phoenixframework.org/docs">Get Started</a></li>
+    <header>
+      <nav class="uk-navbar-container" uk-navbar>
+        <div class="uk-navbar-left">
+          <ul class="uk-navbar-nav">
+            <li class="uk-active"><%= link "Dashwallet", to: dashboard_path(@conn, :index) %></li>
           </ul>
-        </nav>
-        <span class="logo"></span>
-      </header>
+        </div>
+      </nav>
+    </header>
 
-      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+    <div class="uk-section uk-section-default">
+      <div class="uk-container">
+        <%= if message = get_flash(@conn, :info) do %>
+          <div class="uk-alert-primary" uk-alert>
+            <a class="uk-alert-close" uk-close></a>
+            <p><%= message %></p>
+          </div>
+        <% end %>
 
-      <main role="main">
-        <%= render @view_module, @view_template, assigns %>
-      </main>
+        <%= if message = get_flash(@conn, :error) do %>
+          <div class="uk-alert-danger" uk-alert>
+            <a class="uk-alert-close" uk-close></a>
+            <p><%= message %></p>
+          </div>
+        <% end %>
 
-    </div> <!-- /container -->
+        <main role="main">
+          <%= render @view_module, @view_template, assigns %>
+        </main>
+      </div>
+    </div>
   </body>
 </html>
