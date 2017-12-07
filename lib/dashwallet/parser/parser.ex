@@ -49,7 +49,12 @@ defmodule Dashwallet.Parser do
   def expenses_by_tag(data) do
     data
     |> normalize
-    |> Enum.group_by(fn %{tags: [head]} -> head end, fn x -> x.home_amount end)
+    |> Enum.group_by(fn
+      %{tags: [""]} -> "Untagged"
+      %{tags: [head]} -> head
+    end,
+      fn x -> x.home_amount end
+    )
     |> Enum.reduce(%{}, fn {k, v}, acc -> Map.put(acc, k, Float.round(Enum.sum(v), 2)) end)
   end
 

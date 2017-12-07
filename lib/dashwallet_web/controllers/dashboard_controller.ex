@@ -13,7 +13,7 @@ defmodule DashwalletWeb.DashboardController do
       true ->
         conn
         |> put_flash(:info, "No data present. Please upload trailwallet data first.")
-        |> redirect to: upload_path(conn, :index)
+        |> redirect(to: upload_path(conn, :index))
       _ ->
         expenses_by_tag = Parser.expenses_by_tag(data) |> Poison.encode!
 

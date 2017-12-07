@@ -16,8 +16,8 @@ defmodule DashwalletWeb.UploadController do
         conn
         |> put_session(:tw_data_key, id)
         |> put_flash(:info, "You uploaded the following file: #{upload.filename}")
-        |> redirect to: dashboard_path(conn, :index)
-      {:error, err} ->
+        |> redirect(to: dashboard_path(conn, :index))
+      {:error, _err} ->
         conn
         |> put_flash(:error, "There was an error processing your request. Please try again.")
         |> render("index.html")

@@ -39,8 +39,7 @@ defmodule Dashwallet.Mixfile do
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
       {:nimble_csv, "~> 0.3"},
-      {:poison, "~> 3.1", override: true},
-      {:chartkick, "~> 0.0.2"},
+      {:poison, "~> 3.1"},
       {:uuid, "~> 1.1"},
       {:cachex, "~> 2.1"}
     ]

@@ -1,6 +1,8 @@
+<div id="chart-data" data-expenses-by-tag="<%= @expenses_by_tag %>" />
 <div>
   <h4>Tags Analysis</h4>
   <ul>
-    <%= raw Chartkick.pie_chart @expenses_by_tag, height: "800px" %>
+    <div id="expenses-by-tag" style="height: 300px;">Loading chart</div>
   </ul>
 </div>
+<script>require('js/dashboard')</script>
