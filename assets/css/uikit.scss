@@ -2,7 +2,11 @@
 $global-background: #FEFAFF;
 $global-font-family: Barlow, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 
-$button-primary-background: #4C2C54;
+$global-font-size: 16px;
+$global-small-font-size: 0.875rem;
+$global-medium-font-size: 1.25rem;
+
+$global-primary-background: #4C2C54;
 
 $navbar-background: #5D4265;
 $navbar-nav-item-color: rgba(255, 255, 255, 0.5);
@@ -10,12 +14,26 @@ $navbar-nav-item-active-color: rgba(255, 255, 255, 1);
 $navbar-nav-item-hover-color: rgba(255, 255, 255, 0.7);
 $navbar-nav-item-onclick-color: rgba(255, 255, 255, 1);
 
+$card-title-font-size: $global-font-size;
+
+$offcanvas-overlay-background: rgba(0,0,0,0.25);
+$offcanvas-bar-background: #3B2940;
+
 // 2. Import default variables and available mixins.
 @import "variables-theme";
 @import "mixins-theme";
 
 // 3. Your custom mixin overwrites.
-//@mixin hook-card() { color: #000; }
+@mixin hook-card() {
+  border-radius: 3px;
+}
+
+@mixin hook-card-title() {
+  color: rgba(255, 255, 255, 0.9) !important;
+  letter-spacing: 2px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
 
 // 4. Import UIkit.
 @import "uikit-theme";

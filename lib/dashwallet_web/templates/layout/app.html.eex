@@ -14,36 +14,38 @@
   </head>
 
   <body>
-    <header>
-      <nav class="uk-navbar-container" uk-navbar>
-        <div class="uk-navbar-left">
-          <ul class="uk-navbar-nav">
-            <li class="<%= active_link(@conn, DashwalletWeb.DashboardController) %>"><%= link "Dashwallet", to: dashboard_path(@conn, :index) %></li>
-            <li class="<%= active_link(@conn, DashwalletWeb.UploadController) %>"><%= link "Upload", to: upload_path(@conn, :index) %></li>
-          </ul>
+    <div class="uk-offcanvas-content">
+      <header>
+        <nav class="uk-navbar-container" uk-navbar>
+          <div class="uk-navbar-left">
+            <ul class="uk-navbar-nav">
+              <li class="<%= active_link(@conn, DashwalletWeb.DashboardController) %>"><%= link "Dashwallet", to: dashboard_path(@conn, :index) %></li>
+              <li class="<%= active_link(@conn, DashwalletWeb.UploadController) %>"><%= link "Upload", to: upload_path(@conn, :index) %></li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+
+      <div class="uk-section uk-section-default">
+        <div class="uk-container">
+          <%= if message = get_flash(@conn, :info) do %>
+            <div class="uk-alert-primary" uk-alert>
+              <a class="uk-alert-close" uk-close></a>
+              <p><%= message %></p>
+            </div>
+          <% end %>
+
+          <%= if message = get_flash(@conn, :error) do %>
+            <div class="uk-alert-danger" uk-alert>
+              <a class="uk-alert-close" uk-close></a>
+              <p><%= message %></p>
+            </div>
+          <% end %>
+
+          <main role="main">
+            <%= render @view_module, @view_template, assigns %>
+          </main>
         </div>
-      </nav>
-    </header>
-
-    <div class="uk-section uk-section-default">
-      <div class="uk-container">
-        <%= if message = get_flash(@conn, :info) do %>
-          <div class="uk-alert-primary" uk-alert>
-            <a class="uk-alert-close" uk-close></a>
-            <p><%= message %></p>
-          </div>
-        <% end %>
-
-        <%= if message = get_flash(@conn, :error) do %>
-          <div class="uk-alert-danger" uk-alert>
-            <a class="uk-alert-close" uk-close></a>
-            <p><%= message %></p>
-          </div>
-        <% end %>
-
-        <main role="main">
-          <%= render @view_module, @view_template, assigns %>
-        </main>
       </div>
     </div>
   </body>

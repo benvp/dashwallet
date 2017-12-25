@@ -16,9 +16,11 @@ defmodule DashwalletWeb.DashboardController do
         |> redirect(to: upload_path(conn, :index))
       _ ->
         expenses_by_tag = Parser.expenses_by_tag(data) |> Poison.encode!
+        tags = Parser.expenses_by_tag(data) |> Map.keys |> Enum.sort
 
         conn
         |> assign(:expenses_by_tag, expenses_by_tag)
+        |> assign(:tags, tags)
         |> render("index.html")
     end
   end
