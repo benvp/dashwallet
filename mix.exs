@@ -41,7 +41,8 @@ defmodule Dashwallet.Mixfile do
       {:nimble_csv, "~> 0.3"},
       {:poison, "~> 3.1"},
       {:uuid, "~> 1.1"},
-      {:cachex, "~> 2.1"}
+      {:cachex, "~> 2.1"},
+      {:distillery, "~> 1.5", runtime: false}
     ]
   end
 end
