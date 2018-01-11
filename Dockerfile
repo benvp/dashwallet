@@ -18,11 +18,19 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   curl \
   git \
   unzip \
-  build-essential
-  # unixodbc-dev \  # optional
-  # xsltproc \      # optional
-  # fop \           # optional
-  # libxml2-utils   # optional
+  build-essential \
+  # ### optionals ---
+  # m4 \
+  # libwxgtk3.0-dev \
+  # libgl1-mesa-dev \
+  # libglu1-mesa-dev \
+  # libpng3 \
+  # libssh-dev \
+  # unixodbc-dev \
+  # libncurses5-dev
+  # xsltproc \      
+  # fop \           
+  # libxml2-utils 
 
 # RUN useradd -ms $(which bash) asdf
 
@@ -34,6 +42,8 @@ ENV PATH /root/.asdf/bin:/root/.asdf/shims:$PATH
 ENV ASDF_VERSION="0.4.1"
 ENV ERLANG_VERSION="20.2"
 ENV ELIXIR_VERSION="1.5.3"
+
+# install
 
 # install asdf & erlang
 RUN git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v${ASDF_VERSION} && \
